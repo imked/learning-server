@@ -1,33 +1,60 @@
 const express = require('express')
-const { addTotal } = require('./utils')
 const app = express()
+const uid = require('uid')
+
+app.use(express.json())
 
 const data = {
-  users: [
-    { name: 'Dejan', amount: 3 },
-    { name: 'Jerry', amount: 30 },
-    { name: 'Jan', amount: 0 },
+  cards: [
+    {
+      name: 'Card-title1',
+      content: 'Card-content1',
+      id: uid(),
+      tags: ['html', 'css'],
+    },
+    {
+      name: 'Card-title2',
+      content: 'Card-content2',
+      id: uid(),
+      tags: ['react', 'javascript'],
+    },
+    {
+      name: 'Card-title3',
+      content: 'Card-content3',
+      id: uid(),
+      tags: ['html', 'redux', 'css'],
+    },
   ],
 }
 
-app.use(express.static('public'))
-app.use(express.json())
-
-app.post('/coffee', (req, res) => {
-  const newUser = req.body
-  const isNameEqual = user => user.name === newUser.name
-  const user = data.users.find(isNameEqual)
-  if (user) {
-    user.amount += newUser.amount
-  } else {
-    data.users.push(newUser)
-  }
-
-  res.json(addTotal(data))
+app.get('/cards', (req, res) => {
+  res.json(data.cards)
 })
 
-app.get('/coffee', (req, res) => {
-  res.json(addTotal(data))
+app.post('/cards', (req, res) => {
+  const newCard = req.body
+  newCard.id = uid()
+  data.cards.push(newCard)
+  res.json(newCard)
+})
+
+app.put('/cards/:id', (req, res) => {}) //The HTTP PUT request method creates a new resource or replaces a representation of the target resource with the request payload. Only allows complete replacement.
+
+app.patch('/cards/:id', (req, res) => {}) // schickt nur mit, was ersetzt werden soll. The HTTP PATCH request method applies partial modifications to a resource.
+
+app.delete('/cards/:id', (req, res) => {
+  const id = req.params.id
+  const deletedCard = data.cards.find(card => card.id === id)
+  data.cards = data.cards.filter(card => card.id !== id)
+  /*const index = data.cards.findIndex(card => card.id === id)
+const deletedCard = data.cards[index]
+index !== -1 && data.cards.splice(index, 1)
+statt 
+const deletedCard = data.cards.find(card => card.id === id) 
+data.cards = data.cards.filter(card => card.id !== id)
+*/
+
+  res.json(deletedCard)
 })
 
 app.listen(process.env.PORT || 3000, () => {

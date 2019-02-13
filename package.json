@@ -1,5 +1,5 @@
 {
-  "name": "express-intro",
+  "name": "learning-server",
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
@@ -11,7 +11,8 @@
   "author": "Jeremias Erbs <jerry@badabam.de> (http://www.badabam.de/)",
   "license": "UNLICENSED",
   "dependencies": {
-    "express": "4.16.4",
-    "nodemon": "1.18.10"
+    "express": "^4.16.4",
+    "nodemon": "1.18.10",
+    "uid": "0.0.2"
   }
 }
