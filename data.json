@@ -1,0 +1,8 @@
+{
+  "total": 200,
+  "topTen": [
+    { "name": "Dejan", "amount": 3 },
+    { "name": "Jerry", "amount": 30 },
+    { "name": "Jan", "amount": 0 }
+  ]
+}

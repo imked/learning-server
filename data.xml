@@ -1,0 +1,17 @@
+<xml>
+  <total>200</total>
+  <top-ten>
+    <person>
+      <name>Dejan</name>
+      <amount>3</amount>
+    </person>
+    <person>
+      <name>Jerry</name>
+      <amount>30</amount>
+    </person>
+    <person>
+      <name>Jan</name>
+      <amount>0</amount>
+    </person>
+  </top-ten>
+</xml>
