@@ -24,7 +24,7 @@ const data = {
       id: uid(),
       tags: ['html', 'redux', 'css'],
     },
-  ]
+  ],
 }
 
 app.get('/cards', (req, res) => {
@@ -69,6 +69,7 @@ data.cards = data.cards.filter(card => card.id !== id)
   res.json(deletedCard)
 })
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server ready on port 3000')
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log('Server ready on port ' + port)
 })
