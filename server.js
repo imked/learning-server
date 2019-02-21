@@ -24,7 +24,7 @@ const data = {
       id: uid(),
       tags: ['html', 'redux', 'css'],
     },
-  ],
+  ]
 }
 
 app.get('/cards', (req, res) => {
@@ -38,9 +38,21 @@ app.post('/cards', (req, res) => {
   res.json(newCard)
 })
 
-app.put('/cards/:id', (req, res) => {}) //The HTTP PUT request method creates a new resource or replaces a representation of the target resource with the request payload. Only allows complete replacement.
+app.patch('/cards/:id', (req, res) => {
+  const id = req.params.id
+  const index = data.cards.findIndex(card => card.id === id)
+  const card = { ...data.cards[index], ...req.body }
+  data.cards[index] = card
+  res.json(card)
+}) // schickt nur mit, was ersetzt werden soll. The HTTP PATCH request method applies partial modifications to a resource.
 
-app.patch('/cards/:id', (req, res) => {}) // schickt nur mit, was ersetzt werden soll. The HTTP PATCH request method applies partial modifications to a resource.
+app.put('/cards/:id', (req, res) => {
+  const id = req.params.id
+  const index = data.cards.findIndex(card => card.id === id)
+  const card = { ...req.body, id: uid() }
+  data.cards[index] = card
+  res.json(card)
+}) //The HTTP PUT request method creates a new resource or replaces a representation of the target resource with the request payload. Only allows complete replacement.
 
 app.delete('/cards/:id', (req, res) => {
   const id = req.params.id
